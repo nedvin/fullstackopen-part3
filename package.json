@@ -4,12 +4,13 @@
   "description": "exercises for part 3 of full stack open",
   "main": "index.js",
   "scripts": {
-    "build:ui": "rm -rf static && cd frontend && npm run build && cp -r dist ../static",
+    "build:ui": "rm -rf static && cd frontend && rm -rf dist && npm run build && mv dist ../static",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "lint": "eslint ."
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.4.11",
+    "eslint": "^8.54.0",
     "nodemon": "^3.0.1"
   }
 }
