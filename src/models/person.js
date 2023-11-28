@@ -9,9 +9,21 @@ mongoose
   .catch((err) => console.log("error when connecting to MongoDb"));
 
 const personSchema = new mongoose.Schema({
-  id: Number,
-  name: String,
-  number: String,
+  name: {
+    type: String,
+    required: true,
+    minLength: 3,
+  },
+  number: {
+    type: String,
+    validate: {
+      validator: (number) => {
+        return /^\d{2,3}-\d+$/.test(number) && number.length >= 9; // 8 digits, but don't count dash
+      },
+      message: (props) =>
+        "Number should consist of two parts separated by - and consist of minimum 8 digits",
+    },
+  },
 });
 
 personSchema.set("toJSON", {
